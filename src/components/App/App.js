@@ -1,28 +1,57 @@
 import React, { Component } from 'react';
-import { dependencies, devDependencies } from '../../../package.json';
+import Result from '../Result/Result';
+import Search from '../Search/Search';
 
-const deps = Object.assign({}, dependencies, devDependencies);
+const dictionary = [
+  'north america',
+  'south america',
+  'africa',
+  'europe',
+  'asia',
+  'australia',
+  'antarctica',
+];
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      searchValue: '',
+      results: []
+    };
+  }
+
+  onChange = (val) => {
+    this.setState({
+      searchValue: val
+    });
+
+    const regex = new RegExp(`^${val}$`, 'giu');
+    const matchedWords = dictionary.filter(a => a.match(regex));
+    this.setState({
+      results: matchedWords
+    });
+  }
+
   render() {
     return (
       <div>
-        <div class="container">
-          <h1>New React Project</h1>
-          <h2>Features</h2>
+        <header>Wordco.de</header>
+        <Search onChange={this.onChange} />
+        {this.state.results.length === 0 &&
+          <span>:wompwomp: no results</span>
+        }
+        {this.state.results.length > 0 && (
           <ul>
-            <li><a href="https://facebook.github.io/react/">React ({deps['react']})</a></li>
-            <li><a href="https://github.com/reactjs/react-router">React Router ({deps['react-router']})</a></li>
-            <li><a href="https://babeljs.io/">Babel</a></li>
-            <li><a href="https://github.com/gaearon/react-hot-loader">React Hot Loader ({deps['react-hot-loader']})</a></li>
-            <li><a href="https://webpack.github.io/docs/webpack-dev-server.html">Webpack Dev Server</a></li>
-            <li><a href="https://github.com/jtangelder/sass-loader">Sass</a> with <a href="https://github.com/passy/autoprefixer-loader">Autoprefixer</a></li>
+            {this.state.results.map(a => (
+              <li key={a}>
+                <Result value={a} />
+              </li>
+            ))}
           </ul>
-
-          <h2>Generate Components</h2>
-
-          <p>Install <a href="https://github.com/markmur/react-component-gen">react-component-gen</a> to start generating components from the command line.</p>
-        </div>
+        )}
       </div>
     );
   }

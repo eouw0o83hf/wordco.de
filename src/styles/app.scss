@@ -3,7 +3,13 @@ html, body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-.container {
-  max-width: 800px;
-  margin: 2em auto;
+header {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+input {
+  width: 200px;
+  font-size: 1.5em;
+  padding: 0.5em;
 }
