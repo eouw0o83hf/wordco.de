@@ -31,7 +31,7 @@ module.exports = {
 
     path: path.resolve(__dirname, 'dist'),
 
-    publicPath: '/'
+    publicPath: ''
     // necessary for HMR to know where to load the hot update chunks
   },
 
@@ -42,7 +42,7 @@ module.exports = {
     contentBase: path.resolve(__dirname, 'dist'),
     // match the output path
 
-    publicPath: '/'
+    publicPath: ''
     // match the output `publicPath`
   },
 
