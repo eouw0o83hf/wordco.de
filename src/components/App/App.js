@@ -15,7 +15,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    fetch('/english.txt')
+    fetch('content/english.txt')
     .then(a => a.text())
     .then(data => {
       const dictionary = data.split(/\r?\n/);

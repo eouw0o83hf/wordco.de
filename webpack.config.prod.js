@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -48,7 +49,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'New React Project',
       template: 'index.ejs'
-    })
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: 'content/english.txt',
+        to: 'content/english.txt',
+        toType: 'file'
+      },
+    ])
   ],
 
   module: {
@@ -63,7 +71,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(ttf|eot|svg|woff)(\?[a-z0-9]+)?$/,
+        test: /\.(ttf|eot|svg|woff|txt)(\?[a-z0-9]+)?$/,
         use: [
           { loader: 'file-loader?name=[path][name].[ext]' }
         ]
@@ -76,5 +84,5 @@ module.exports = {
         }]
       }
     ]
-  }
+  },
 };

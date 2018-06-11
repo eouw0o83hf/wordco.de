@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -50,7 +51,7 @@ module.exports = {
        path.resolve(__dirname, 'src'),
       'node_modules'
     ],
-    extensions: ['.js', '.jsx', '.scss', '.css', '.json', '.txt'],
+    extensions: ['.js', '.jsx', '.scss', '.css', '.json'],
     alias: {
       components: path.resolve(__dirname, 'src/components')
     },
@@ -65,7 +66,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'New React Project',
       template: 'index.ejs'
-    })
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: 'content/english.txt',
+        to: 'content/english.txt',
+        toType: 'file'
+      },
+    ])
   ],
 
   module: {
@@ -80,7 +88,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(ttf|eot|svg|woff)(\?[a-z0-9]+)?$/,
+        test: /\.(ttf|eot|svg|woff|txt)(\?[a-z0-9]+)?$/,
         use: [
           { loader: 'file-loader?name=[path][name].[ext]' }
         ]
