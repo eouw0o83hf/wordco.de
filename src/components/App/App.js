@@ -2,16 +2,6 @@ import React, { Component } from 'react';
 import Result from '../Result/Result';
 import Search from '../Search/Search';
 
-const dictionary = [
-  'north america',
-  'south america',
-  'africa',
-  'europe',
-  'asia',
-  'australia',
-  'antarctica',
-];
-
 class App extends Component {
 
   constructor(props) {
@@ -19,8 +9,20 @@ class App extends Component {
 
     this.state = {
       searchValue: '',
-      results: []
+      results: [],
+      dictionary: []
     };
+  }
+
+  componentWillMount() {
+    fetch('/english.txt')
+    .then(a => a.text())
+    .then(data => {
+      const dictionary = data.split(/\r?\n/);
+      this.setState({
+        dictionary: dictionary
+      });
+    });
   }
 
   onChange = (val) => {
@@ -29,15 +31,19 @@ class App extends Component {
     });
 
     const regex = new RegExp(`^${val}$`, 'giu');
-    const matchedWords = dictionary.filter(a => a.match(regex));
+    const matchedWords = this.state.dictionary.filter(a => a.match(regex));
     this.setState({
       results: matchedWords
     });
   }
 
   render() {
+    if(this.state.dictionary.length === 0) {
+      return <div>Loading...</div>;
+    }
     return (
       <div>
+        <span>Dictionary count: this.state.dictionary.length</span>
         <header>Wordco.de</header>
         <Search onChange={this.onChange} />
         {this.state.results.length === 0 &&
