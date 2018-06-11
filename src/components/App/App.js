@@ -44,6 +44,8 @@ class App extends Component {
     return (
       <div>
         <header>wordco.de</header>
+        <p>Enter a regex for the word you need.</p>
+        <p>Probably avoid the * operator - this runs on your browser against the entire English language.</p>
         <Search onChange={this.onChange} />
         {this.state.results.length === 0 &&
           <span>:wompwomp: no results</span>
