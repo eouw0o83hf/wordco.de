@@ -47,7 +47,7 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
     new HtmlWebpackPlugin({
-      title: 'New React Project',
+      title: 'wordco.de',
       template: 'index.ejs'
     }),
     new CopyWebpackPlugin([

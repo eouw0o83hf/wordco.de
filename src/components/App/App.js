@@ -43,8 +43,7 @@ class App extends Component {
     }
     return (
       <div>
-        <span>Dictionary count: this.state.dictionary.length</span>
-        <header>Wordco.de</header>
+        <header>wordco.de</header>
         <Search onChange={this.onChange} />
         {this.state.results.length === 0 &&
           <span>:wompwomp: no results</span>

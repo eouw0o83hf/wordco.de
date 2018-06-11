@@ -64,7 +64,7 @@ module.exports = {
       __DEVELOPMENT__: true
     }),
     new HtmlWebpackPlugin({
-      title: 'New React Project',
+      title: 'wordco.de',
       template: 'index.ejs'
     }),
     new CopyWebpackPlugin([
