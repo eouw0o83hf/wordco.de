@@ -1,37 +1,37 @@
-const path = require('path');
-const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const webpack = require("webpack");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  context: path.resolve(__dirname, 'src'),
+  context: path.resolve(__dirname, "src"),
 
-  devtool: 'cheap-module-source-map',
+  devtool: "cheap-module-source-map",
 
   entry: [
-    'babel-polyfill',
+    "babel-polyfill",
 
-    'react-hot-loader/patch',
-     // activate HMR for React
+    "react-hot-loader/patch",
+    // activate HMR for React
 
-    'webpack-dev-server/client?http://localhost:8080',
+    "webpack-dev-server/client?http://localhost:8080",
     // bundle the client for webpack-dev-server
     // and connect to the provided endpoint
 
-    'webpack/hot/only-dev-server',
+    "webpack/hot/only-dev-server",
     // bundle the client for hot reloading
     // only- means to only hot reload for successful updates
 
-    './main.js'
+    "./main.js"
   ],
 
   output: {
-    filename: 'bundle.js',
+    filename: "bundle.js",
     // the output bundle
 
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, "dist"),
 
-    publicPath: ''
+    publicPath: ""
     // necessary for HMR to know where to load the hot update chunks
   },
 
@@ -39,22 +39,19 @@ module.exports = {
     hot: true,
     // enable HMR on the server
 
-    contentBase: path.resolve(__dirname, 'dist'),
+    contentBase: path.resolve(__dirname, "dist"),
     // match the output path
 
-    publicPath: ''
+    publicPath: ""
     // match the output `publicPath`
   },
 
   resolve: {
-    modules: [
-       path.resolve(__dirname, 'src'),
-      'node_modules'
-    ],
-    extensions: ['.js', '.jsx', '.scss', '.css', '.json'],
+    modules: [path.resolve(__dirname, "src"), "node_modules"],
+    extensions: [".js", ".jsx", ".json"],
     alias: {
-      components: path.resolve(__dirname, 'src/components')
-    },
+      components: path.resolve(__dirname, "src/components")
+    }
   },
 
   plugins: [
@@ -64,15 +61,15 @@ module.exports = {
       __DEVELOPMENT__: true
     }),
     new HtmlWebpackPlugin({
-      title: 'wordco.de',
-      template: 'index.ejs'
+      title: "wordco.de",
+      template: "index.ejs"
     }),
     new CopyWebpackPlugin([
       {
-        from: 'content/english.txt',
-        to: 'content/english.txt',
-        toType: 'file'
-      },
+        from: "content/english.txt",
+        to: "content/english.txt",
+        toType: "file"
+      }
     ])
   ],
 
@@ -81,24 +78,23 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' },
-          { loader: 'autoprefixer-loader', options: { browsers: 'last 2 versions' } },
-          { loader: 'sass-loader', options: { outputStyle: 'expanded' } }
+          { loader: "style-loader" },
+          { loader: "css-loader" },
+          { loader: "autoprefixer-loader", options: { browsers: "last 2 versions" } }
         ]
       },
       {
         test: /\.(ttf|eot|svg|woff|txt)(\?[a-z0-9]+)?$/,
-        use: [
-          { loader: 'file-loader?name=[path][name].[ext]' }
-        ]
+        use: [{ loader: "file-loader?name=[path][name].[ext]" }]
       },
       {
         test: /\.(js|jsx)?$/,
         exclude: /node_modules/,
-        use: [{
-          loader: 'babel-loader'
-        }]
+        use: [
+          {
+            loader: "babel-loader"
+          }
+        ]
       }
     ]
   }

@@ -1,14 +1,9 @@
-import 'styles/app.scss';
+import React from "react";
+import { AppContainer } from "react-hot-loader";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import React from 'react';
-import { AppContainer } from 'react-hot-loader';
-import ReactDOM from 'react-dom';
-import {
-  BrowserRouter as Router,
-  Route
-} from 'react-router-dom';
-
-import { App } from 'components';
+import { App } from "components";
 
 const routes = (
   <Router>
@@ -16,15 +11,10 @@ const routes = (
   </Router>
 );
 
-const outlet = document.getElementById('app')
+const outlet = document.getElementById("app");
 
 const render = () => {
-  ReactDOM.render(
-    <AppContainer>
-      {routes}
-    </AppContainer>,
-    outlet
-  );
+  ReactDOM.render(<AppContainer>{routes}</AppContainer>, outlet);
 };
 
 render();
